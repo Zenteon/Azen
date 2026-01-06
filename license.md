@@ -1,6 +1,6 @@
 ### AGNYA License
 
-Copyright (C) 2025 Daniel Oren-Ibarra 
+Copyright (C) 2026 Daniel Oren-Ibarra 
 
 All rights reserved unless explicitly stated. Rev 1.3
 
