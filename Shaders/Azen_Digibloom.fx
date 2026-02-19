@@ -25,7 +25,7 @@
 #if(__RENDERER__ != 0x9000)
 
 	#include "ReShade.fxh"
-	#include "ZenteonCommon.fxh"
+	#include "AzenCommon.fxh"
 	
 	
 	#ifndef PERFORMANCE_MODE
