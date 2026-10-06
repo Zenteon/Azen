@@ -21,7 +21,7 @@
 #define DIVRES_N(DIVRES_RIV, NRES) Width = DIV_RND_UP(NRES.x, DIVRES_RIV); Height = DIV_RND_UP(NRES.y, DIVRES_RIV)
 
 
-#define PS_INPUTS float4 vpos : SV_Position, float2 xy : TEXCOORD0
+#define PS_INPUTS float4 vpos : SV_Position, float2 uv : TEXCOORD0
 
 //Pass helpers
 
