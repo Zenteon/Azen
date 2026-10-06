@@ -125,7 +125,7 @@ uniform bool CROP_AR <
 
 #ifndef VERTICAL_RES
 //============================================================================================
-	#define VERTICAL_RES 360
+	#define VERTICAL_RES 480
 //============================================================================================
 #endif
 
@@ -308,7 +308,7 @@ namespace ZenSharpen {
 	{
 		float2 uvs;
 		
-		float mip = max(log2(1.0 +  CAM_RES * fwidth(uv)).x - 0.0, 0.0);
+		float mip = max(log2(RES * fwidth(uv)).x - 0.5, 0.0);
 		
 		float r = tex2Dlod(sHDR, float4(WarpUV(uv, 0.0030), 0, mip) ).x;
 		float g = tex2Dlod(sHDR, float4(WarpUV(uv, 0.0015), 0, mip) ).g;
