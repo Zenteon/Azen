@@ -230,54 +230,54 @@ namespace ZenAutoGrade {
 	//=============================================================================
 	float4 PrepPS(PS_INPUTS) : SV_Target
 	{
-		float3 c	= GetBackBuffer(xy);
+		float3 c	= GetBackBuffer(uv);
 		float3 lab  = SRGBtoOKLAB(c);
 		return float4(lab.yz, lab.x, lab.x*lab.x);
 	}
 	
 	float4 Down0(PS_INPUTS) : SV_Target
 	{
-		return DUSample(BlurSam0, xy, 2.0);
+		return DUSample(BlurSam0, uv, 2.0);
 	}
 	
 	float4 Down1(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam0, xy, 4.0);
+		return DUSample(DownSam0, uv, 4.0);
 	}
 	
 	float4 Down2(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam1, xy, 8.0);
+		return DUSample(DownSam1, uv, 8.0);
 	}
 	
 	float4 Down3(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam2, xy, 16.0);
+		return DUSample(DownSam2, uv, 16.0);
 	}
 	
 	float4 Down4(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam3, xy, 32.0);
+		return DUSample(DownSam3, uv, 32.0);
 	}
 	
 	float4 Down5(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam4, xy, 64.0);
+		return DUSample(DownSam4, uv, 64.0);
 	}
 	
 	float4 Down6(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam5, xy, 128.0);
+		return DUSample(DownSam5, uv, 128.0);
 	}
 	
 	float4 Down7(PS_INPUTS) : SV_Target
 	{
-		return DUSample(DownSam6, xy, 256.0);
+		return DUSample(DownSam6, uv, 256.0);
 	}
 	
 	float4 CopyBBPS(PS_INPUTS) : SV_Target
 	{
-		return float4(pow(GetBackBuffer(xy), 2.2), 1.0);
+		return float4(pow(GetBackBuffer(uv), 2.2), 1.0);
 	}
 	
 	//=============================================================================
