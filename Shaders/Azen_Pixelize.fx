@@ -141,10 +141,10 @@ namespace ZenSharp {
 	float3 BlendPS(PS_INPUTS) : SV_Target
 	{
 		float2 tr = RES / PIXEL_SIZE;
-		xy = (floor(tr * xy) + 0.5) / tr;
-		float3 c = GetBackBuffer(xy);
+		uv = (floor(tr * uv) + 0.5) / tr;
+		float3 c = GetBackBuffer(uv);
 		
-		float dither = 2.0 * DITHER_INTENSITY * (GetDither(xy*tr + 0.5, DITHER_PATTERN) - 0.5);
+		float dither = 2.0 * DITHER_INTENSITY * (GetDither(uv*tr + 0.5, DITHER_PATTERN) - 0.5);
 		c = sqrt(c);
 		c = saturate(round(c * QUANTIZE_DEPTH + dither) / QUANTIZE_DEPTH);
 		c = pow(c, 2.0 + GAMMA );
