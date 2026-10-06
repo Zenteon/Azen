@@ -1,6 +1,6 @@
 //========================================================================
 /*
-	Copyright © Daniel Oren-Ibarra - 2024
+	Copyright © Daniel Oren-Ibarra - 2026
 	All Rights Reserved.
 
 	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND
@@ -13,7 +13,7 @@
 	
 	
 	======================================================================	
-	Zentient: Radon v0.1 - Authored by Daniel Oren-Ibarra "Zenteon"
+	Azen: Digibloom - Authored by Daniel Oren-Ibarra "Zenteon"
 	
 	Discord: https://discord.gg/PpbcqJJs6h
 	Patreon: https://patreon.com/Zenteon
@@ -138,13 +138,14 @@
 		
 		float3 TMO(float3 x)
 		{
-			return pow(1.05 * x / (x + 1.0), rcp(2.2));
+			return ReinJ(x, HDR);//return pow(1.1 * x / (x + 1.0), rcp(2.2));
 		}
 		
 		float3 ITMO(float3 x)
 		{
-			x = pow(x,2.2);
-			return max(0, -x / (x - 1.05));
+			return IReinJ(x, HDR);
+			//x = pow(x,2.2);
+			//return max(0, -x / (x - 1.1));
 		}
 		
 		//===================================================================================
@@ -152,9 +153,9 @@
 		//===================================================================================
 		float4 GenHDRPS(PS_INPUTS) :SV_Target
 		{
-			float3 i = GetBackBuffer(xy + 0.5 / RES);
+			float3 i = GetBackBuffer(uv + 0.5 / RES);
 			float il = GetLuminance(i);
-			float d  = GetDepth(xy);
+			float d  = GetDepth(uv);
 			return float4(ITMO(i), d);
 		}
 		
@@ -185,14 +186,14 @@
 		float4 AccPS0(PS_INPUTS) : SV_Target
 		{
 			float2 hp = 0.0 / R_RES;
-			return tex2D(sTemp0, xy + hp) + tex2D(sTemp1, xy + hp);
+			return tex2D(sTemp0, uv + hp) + tex2D(sTemp1, uv + hp);
 		}
 		
 		[shader("pixel")]
 		float4 AccPS1(PS_INPUTS) : SV_Target
 		{
 			float2 hp = 0.0 / R_RES;
-			return tex2D(sTemp2, xy + hp) + tex2D(sTemp3, xy + hp);
+			return tex2D(sTemp2, uv + hp) + tex2D(sTemp3, uv + hp);
 		}
 		
 		//===================================================================================
@@ -225,11 +226,11 @@
 		[shader("pixel")]
 		float3 BlendPS(PS_INPUTS) : SV_Target
 		{
-			float4 t = tex2D(sAcc1, xy) / 4.0;
+			float4 t = tex2D(sAcc1, uv) / 4.0;
 			float3 bloom = t.rgb;
-			float3 input = ITMO(GetBackBuffer(xy));
+			float3 input = ITMO(GetBackBuffer(uv));
 			
-			float d = GetDepth(xy);
+			float d = GetDepth(uv);
 			float mask = saturate(t.a/d) * saturate(d/t.a);
 			
 			mask *= mask;
