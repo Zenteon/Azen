@@ -28,12 +28,21 @@
 uniform int FRAME_COUNT <
 	source = "framecount";>;
 
+uniform int DESCRIPTION <
+	ui_label = " ";
+	ui_category = "NostalgiaBait";
+	ui_type = "radio";
+	ui_text = "NostalgiaBait is a relatively simple shader meant to emulate 'the look' of cheap \n"
+			  "digital cameras from the early 2000s-2010s \n"
+			  "100% human code, with color transforms captured from physical cameras.\n";
+> = 0;
 
 uniform float INPUT_WP <
 	ui_type = "drag";
 	ui_label = "Input Whitepoint";
 	ui_min = 1.0;
 	ui_max = 5.0;
+	ui_tooltip = "How much the dynamic range of the input is scaled";
 	ui_category = "Global";
 > = 4.0;
 
@@ -42,6 +51,7 @@ uniform float EXPOSURE <
 	ui_label = "Exposure";
 	ui_min = 0.0;
 	ui_max = 2.0;
+	ui_tooltip = "Camera exposure";
 	ui_category = "Global";
 > = 0.5;
 
@@ -58,6 +68,7 @@ uniform float SENSOR_NOISE <
 	ui_label = "Sensor Noise";
 	ui_min = 0.0;
 	ui_max = 1.0;
+	ui_tooltip = "Blends in digital sensor noise";
 	ui_category = "Camera";
 > = 0.3;
 
@@ -66,12 +77,14 @@ uniform float LENS <
 	ui_type = "drag";
 	ui_min = 0.0;
 	ui_max = 1.0;
+	ui_tooltip = "Blends in CA, fringing, and lens distortion";
 	ui_category = "Camera";
 > = 1;
 
 uniform bool DEMOSAIC <
 	ui_label = "Demoisaic";
 	ui_category = "Camera";
+	ui_tooltip = "Emulates demosaicing/debayering";
 > = 0;
 
 
@@ -79,6 +92,9 @@ uniform int COLOR_TR <
 	ui_label = "Color Transform";
 	ui_type = "combo";
 	ui_items = "iCam4\0MiniCam\0None\0";
+	ui_tooltip = "Transform the output colors using data captured from actual cameras, \n"
+				 "MiniCam was captured from a $10 mini camera I had lying around \n"
+				 "iCam4 was captured from my 4th gen iPodTouch";
 	ui_category = "Post";
 > = 1;
 
@@ -87,6 +103,7 @@ uniform float SHARPENING <
 	ui_label = "Sharpening";
 	ui_min = 0.0;
 	ui_max = 2.0;
+	ui_tooltip = "Post sharpening, very crunchy and simple, as was common for digital cameras of the era";
 	ui_category = "Post";
 > = 1.0;
 
@@ -96,10 +113,12 @@ uniform float LCD_EM <
 	ui_label = "LCD Overlay";
 	ui_min = 0.0;
 	ui_max = 1.0;
+	ui_tooltip = "Blends in an LCD array mask (not a CRT emulation), if you want CRT instead use a dedicated shader for it";
 	ui_category = "Post";
 > = 0.3;
 uniform bool CROP_AR <
 	ui_label = "Crop Aspect Ratio";
+	ui_tooltip = "Crop image to 4:3";
 	ui_category = "Post";
 > = 1;
 
